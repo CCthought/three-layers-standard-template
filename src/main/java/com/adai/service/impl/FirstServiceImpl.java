@@ -19,6 +19,6 @@ public class FirstServiceImpl implements IFirstService {
 
     @Override
     public Integer insert() {
-        return firstDao.insert();
+        return firstDao.insert(null);
     }
 }

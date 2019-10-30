@@ -3,7 +3,10 @@
 <mapper namespace="com.adai.dao.FirstDao">
 
     <insert id="insert">
-        insert into person(`name`,age) values("测试数据",21);
+        insert into student(`username`,`age`,`height`,`sex`,`address`,`create_time`,`update_time`) values
+        <foreach collection="studentList" item="student" index="index" separator=",">
+            (#{student.username},#{student.age},#{student.height},#{student.sex},#{student.address},now(),null)
+        </foreach>
     </insert>
     <select id="select" resultType="java.lang.String">
         select * from person limit 1
