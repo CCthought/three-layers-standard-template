@@ -5,4 +5,7 @@
     <insert id="insert">
         insert into person(`name`,age) values("测试数据",21);
     </insert>
+    <select id="select" resultType="java.lang.String">
+        select * from person limit 1
+    </select>
 </mapper>

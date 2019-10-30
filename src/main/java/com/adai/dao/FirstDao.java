@@ -12,4 +12,10 @@ public interface FirstDao {
      */
     Integer insert();
 
+    /**
+     * 查找
+     * @return .
+     */
+    String select();
+
 }
