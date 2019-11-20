@@ -2,13 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.adai.dao.FirstDao">
 
-    <insert id="insert">
+    <sql id="Base_Column">
+        `username`,`age`,`height`,`sex`,`address`,`create_time`,`update_time`
+    </sql>
+
+    <insert id="batchInsert">
         insert into student(`username`,`age`,`height`,`sex`,`address`,`create_time`,`update_time`) values
-        <foreach collection="studentList" item="student" index="index" separator=",">
+        <foreach collection="studentList" item="student" separator=",">
             (#{student.username},#{student.age},#{student.height},#{student.sex},#{student.address},now(),null)
         </foreach>
     </insert>
-    <select id="select" resultType="java.lang.String">
-        select * from person limit 1
+
+    <insert id="insertSingle">
+        insert into student(`username`, `age`, `height`, `sex`, `address`, `create_time`, `update_time`
+        )
+        values (#{student.username}, #{student.age}, #{student.height}, #{student.sex}, #{student.address}, now(), null)
+    </insert>
+
+    <insert id="insertStatic">
+        insert into student(`username`, `age`, `height`, `sex`, `address`, `create_time`, `update_time`
+        )
+        values ('阿呆', 21, 173, 1, '江湖天下第二街', now(), null)
+    </insert>
+
+    <update id="updateStatic">
+        update student
+        set username = #{username}
+        where id =
+              (select id from (select id from student order by id limit 1) as a)
+    </update>
+
+    <select id="selectAll" resultType="com.adai.pojo.Student">
+        select `username`, `age`, `height`, `sex`, `address`, `create_time`, `update_time`
+        from student
     </select>
 </mapper>
